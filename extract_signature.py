@@ -75,9 +75,11 @@ def obtain_signature(image_source,
     imshow_verbose(image, cmap='gray', image_size=(inline if type(inline) == int else 10))
     if threshold:
         pr('Binarising with threshold at', threshold)
-        imagem = image
-        imagem[imagem >= threshold] = 255
-        imagem[imagem < threshold] = 0
+        imgf = image
+        imgf[imgf >= threshold] = 255
+        imgf[imgf < threshold] = 0
+        imagem = cv2.bitwise_not(imgf)
+
     else:
         ret, imgf = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         pr('Binarising with threshold at', ret, 'using OTSU')
