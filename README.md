@@ -42,3 +42,8 @@ optional arguments:
   --ext EXT             the file extension to save the target image file
                         [default: 'png']
 ```
+To visualise inline in jupyter notebook, use this snippet of code and get the help message at the first run
+```python
+import extract_signature
+help(extract_signature.obtain_signature)
+```
