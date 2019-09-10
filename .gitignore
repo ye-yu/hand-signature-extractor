@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# test files
+test_files/
+
+#development-notebook
+dev-notebook.ipynb
