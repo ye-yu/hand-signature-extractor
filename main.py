@@ -1,5 +1,5 @@
 import argparse
-
+import cv2
 parser = argparse.ArgumentParser(description='Program to extract signature from source image')
 parser.add_argument('--source', 
     help='path to the source of the image', 
@@ -33,8 +33,13 @@ parser.add_argument('--ext',
 args = parser.parse_args()
 source = args.source
 threshold = args.threshold
+if args.op_shape == 'ellipse':
+    op_shape = cv2.MORPH_ELLIPSE
+elif args.op_shape == 'rect':
+    op_shape = cv2.MORPH_RECT
+elif args.op_shape == 'cross':
+    op_shape = cv2.MORPH_CROSS
 op_ksize = args.op_ksize
-op_shape = args.op_shape
 verbose = args.verbose
 try:
     inline = int(args.inline)
@@ -49,10 +54,11 @@ ext = args.ext
 
 args = dict(
     threshold=threshold,
-    op_ksize=op_ksize,
-    op_shape=op_shape,
+    opening_ksize=op_ksize,
+    opening_shape=op_shape,
     verbose=verbose,
     inline=inline,
     ext=ext
 )
-print(args)
+import extract_signature
+extract_signature.obtain_signature(source, **args)
